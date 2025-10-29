@@ -47,6 +47,17 @@ app.post('/register', async (req, res) => {
   }
 })
 
+app.get('/users', async (req, res) => {
+  try {
+    const [rows] = await pool.promise()
+      .query('SELECT `id`, `email` FROM `usuarios`');
+    res.json(rows);
+  } catch (error) {
+    console.error(error);
+    res.send('Error fetching users')
+  }
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
