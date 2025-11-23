@@ -15,9 +15,11 @@ const JWT_SECRET = process.env.JWT_SECRET || 'mi_secreto_super_seguro'
 // Nota: ahora usamos el campo `role` desde la base de datos (admin | client)
 
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  database: 'meli'
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  database: process.env.DB_NAME || 'meli',
+  password: process.env.DB_PASSWORD || '',
+  port: process.env.DB_PORT || 3306
 });
 
 // Middleware: verifica JWT y adjunta `req.user`
